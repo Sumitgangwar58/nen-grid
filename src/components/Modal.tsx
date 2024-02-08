@@ -86,7 +86,7 @@ const Modal = (props: ModalI) => {
           </label>
         </form>
         <div className="modal-footer">
-          <button>Cancel</button>
+          <button onClick={onClose}>Cancel</button>
           <button disabled={error.length !== 0} onClick={handelSubmit}>
             Ok
           </button>
