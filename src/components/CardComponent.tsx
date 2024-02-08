@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { data } from "../assets/data";
 import {
   deleteIcon,
@@ -9,12 +9,16 @@ import {
   website,
 } from "../assets/SvgIcons";
 import Modal from "./Modal";
+import { DataContext } from "../dataContext/dataContext";
 
 const imgUrl =
   "https://avatars.dicebear.com/v2/avataaars/Bret.svg?options[mood][]=happy";
 
 export default function Card(props: data) {
   const [open, setOpen] = useState(false);
+  const { dispatch } = useContext(DataContext);
+
+  const [isLiked, setIsLiked] = useState(false);
   return (
     <>
       <div className="card">
@@ -37,18 +41,18 @@ export default function Card(props: data) {
           </div>
         </div>
         <div className="card-footer">
-          <button>
-            <i>{heart}</i>
+          <button onClick={() => setIsLiked((prev) => !prev)}>
+            <i className={`${isLiked ? "liked" : ""}`}>{heart}</i>
           </button>
           <button onClick={() => setOpen((prev) => !prev)}>
             <i>{edit}</i>
           </button>
-          <button>
+          <button onClick={() => dispatch && dispatch(props, "DELETE")}>
             <i>{deleteIcon}</i>
           </button>
         </div>
       </div>
-      {open && <Modal />}
+      <Modal initialValue={props} onClose={() => setOpen(false)} open={open} />
     </>
   );
 }

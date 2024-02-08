@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { data, dummyData } from "./assets/data";
 import Card from "./components/CardComponent";
+import { DataContext } from "./dataContext/dataContext";
 
 export default function Children1() {
-  console.log(dummyData);
+  const { users } = useContext(DataContext);
   return (
     <div className="layout">
-      {dummyData.map((item: data) => {
+      {users.map((item: data) => {
         return (
           <React.Fragment key={item.uniqueId}>
             <Card {...item} />

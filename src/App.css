@@ -105,7 +105,7 @@
   padding: 10px 20px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 50px;
 }
 
 .modal-body label {
@@ -119,6 +119,19 @@
   padding: 5px 10px;
   border: 1px solid var(--borderColor);
   font-size: 14px;
+  outline: none;
+}
+
+input.error {
+  border-color: red;
+  position: relative;
+}
+
+.helper-text {
+  color: red;
+  position: absolute;
+  left: calc(20% + 10px);
+  top: 35px;
 }
 
 .modal-body label p::before {
@@ -166,6 +179,10 @@
   opacity: 0.6;
 }
 
+.modal-footer button:last-child:disabled {
+  cursor: not-allowed;
+}
+
 @media screen and (max-width: 1200px) {
   .layout {
     grid-template-columns: 1fr 1fr 1fr;
@@ -176,4 +193,35 @@
   .layout {
     grid-template-columns: 1fr;
   }
+}
+.modal-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.7);
+  /* z-index: 1; */
+  transform: translate(-50%, -50%);
+}
+
+/* Hide overlay by default */
+.modal-overlay {
+  display: none;
+}
+
+/* Optional: Add animation for modal */
+.modal {
+  display: none;
+  transition: display 0.3s ease;
+}
+
+/* Show modal with animation when open class is present */
+.modal.open {
+  z-index: 999;
+  display: block;
+}
+
+.liked {
+  color: rgb(255, 0, 0);
 }
